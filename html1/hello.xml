@@ -1,0 +1,37 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<!DOCTYPE communication SYSTEM "hello.dtd">
+<communication>
+    <messages>
+        <message>
+            <title lang="en">Hello</title>
+            <title lang="ro">Buna</title>
+            <body>Hello, world from XML!</body>
+            <footer>August 29, 2022</footer>
+        </message>
+    </messages>
+    <people>
+        <person>
+            <firstName>Gabi &lt; &#0950; &#128512;</firstName>
+            <lastName>Guțu</lastName>
+            <type>Trainer</type>
+        </person>
+        <person>
+            <firstName>Mario</firstName>
+            <lastName>Versehora</lastName>
+            <type>Student</type>
+        </person>
+        <person>
+            <firstName>Mario</firstName>
+            <lastName>O&apos;Neil</lastName>
+            <type>Student</type>
+        </person>
+        <!-- 
+            chinese person following 
+        -->
+        <person>
+            <firstName>杨</firstName>
+            <lastName>黄</lastName>
+            <type />
+        </person>
+    </people>
+</communication>

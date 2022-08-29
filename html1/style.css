@@ -1,0 +1,49 @@
+thead {
+    background-color: bisque;
+}
+
+#student {
+    border: 2px solid red;
+}
+
+.spaced {
+    letter-spacing: 2px;
+    text-decoration: underline;
+}
+
+p.spaced {
+    color: blue;
+}
+
+p .spaced, div > .spaced { /* All children (and nephews) with class spaced of element p */
+    color: green;
+}
+
+[type="number"] {
+    background-color: gray;
+}
+
+article {
+    border: 1px dotted red;
+    margin-top: 2px;
+    padding-bottom: 3px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#left-div {
+    width: 40%;
+    float: right;
+    border: 3px dashed blue;
+}
+
+#right-div {
+    float: left;
+    width: 30%;
+    border: 2px solid green;
+}
+
+#left-right-zone {
+    width: 80%;
+    border: 1px solid orange;
+    overflow: hidden;
+}
