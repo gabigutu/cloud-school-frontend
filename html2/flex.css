@@ -1,0 +1,65 @@
+#flex-parent,
+#flex-parent3 {
+    display: flex;
+}
+
+#flex-parent div,
+#flex-parent3 div {
+    flex: 1;
+    border: 1px solid red;
+}
+
+#flex-parent div.three {
+    flex: 3;
+}
+
+#flex-parent2,
+#flex-parent4 {
+    display: flex;
+    flex-direction: column;
+}
+
+#flex-parent2 div,
+#flex-parent4 div {
+    flex: 1;
+    border: 1px solid red;
+}
+
+#flex-parent2 div.three {
+    flex: 3;
+    height: 400px;
+}
+
+#grid-parent {
+    display: grid;
+    grid-template-columns: 50px 50px 50px 50px 50px 50px;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "header header header header header header"
+        "left main main main push right "
+        "footer footer footer footer footer footer";
+}
+#grid-parent .header {
+    grid-area: header;
+    background-color: blue;
+}
+#grid-parent .left {
+    grid-area: left;
+    background-color: red;
+}
+#grid-parent .content {
+    grid-area: main;
+    background-color: gray;
+}
+#grid-parent .push {
+    grid-area: push;
+    background-color: green;
+}
+#grid-parent .right {
+    grid-area: right;
+    background-color: aquamarine;
+}
+#grid-parent .footer {
+    grid-area: footer;
+    background-color: bisque;
+}

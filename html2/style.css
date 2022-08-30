@@ -1,0 +1,83 @@
+html {
+    font-size: 20px;
+}
+#grandpa {
+    border: 1px solid green;
+}
+#parent {
+    border: 1px solid black;
+}
+#child1 {
+    border: 1px solid red;
+    width: 100px;
+    height: 50px;
+}
+#child2 {
+    border: 1px solid blue;
+    width: 100px;
+    height: 90px;
+    position: absolute;
+    top: 0;
+    left: 50px;
+}
+
+#left-wrapper {
+    width: 50%;
+    float: left;
+    height: 150px;
+}
+#left-div {
+    border: 1px solid rgb(54, 132, 176);
+    background-color: azure;
+    
+}
+#right-wrapper {
+    width: 50%;
+    float: left;
+    height: 150px;
+    
+}
+#right-div {
+    border: 1px solid #a95f7d;
+    background-color: aquamarine;
+}
+
+#first-rem {
+    background-color: #a95f7d;
+    /* border: 1px solid black; */
+    width: 10rem;
+    clear: left;
+    font-size: 1.5em;
+}
+#first-rem h1 {
+    /* font-size: ; */
+}
+
+#your-name {
+    text-decoration: underline;
+}
+.inl-blk {
+    width: 100px;
+    display: inline;
+}
+.inl-block1 {
+    background-color: aquamarine;
+}
+.inl-block2 {
+    background-color: bisque;
+}
+
+#menu li {
+    display: inline;
+    margin-right: 20px;
+}
+li.last-li {
+    margin-right: 0 !important;
+}
+#menu li:last-child {
+    margin-right: 0 !important;
+}
+a:visited {
+    /* background-color: gray; */
+    color: gray;
+}
