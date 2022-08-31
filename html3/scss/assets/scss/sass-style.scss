@@ -1,0 +1,27 @@
+@import 'base';
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$font-size: 16px;
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+  font-size: $font-size;
+}
+
+p {
+  font-size: $font-size * 1.2;
+}
+
+nav#main-menu {
+  ul {
+    background-color: $default-background-color;
+  }
+  li {
+    display: inline;
+  }
+  a {
+    text-decoration: underline;
+  }
+}

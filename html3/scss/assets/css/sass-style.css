@@ -1,0 +1,21 @@
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+  font-size: 16px;
+}
+
+p {
+  font-size: 19.2px;
+}
+
+nav#main-menu ul {
+  background-color: #eee;
+}
+
+nav#main-menu li {
+  display: inline;
+}
+
+nav#main-menu a {
+  text-decoration: underline;
+}
