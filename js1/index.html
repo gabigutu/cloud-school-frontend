@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hello, JavaScript!</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script> -->
+    <script src="domManipulator.js"></script>
+    <script src="wait.js" defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 border">
+                DIV INALT
+            </div>
+            <div class="col-lg-2">
+                <div class="row">
+                    <div clas="col-lg-2 border">#</div>
+                    <div clas="col-lg-10 border">DIV SCUND</div>
+                </div>
+                <div class="row">
+                    <div clas="col-lg-12 border">DIV INALT</div>
+                </div>
+            </div>
+            <div class="col-lg-6 border">
+                DIV LAT
+            </div>
+        </div>
+    </div>
+
+    <main id="main">
+        <h1 id="hello-message" class="highlight">Hello, JavaScript!</h1>
+        <div id="details">
+            <p class="selectable">Hello, details 0!</p>
+            <p class="selectable">Hello, <span>details</span> 1!</p>
+            <p>Hello, details 2!</p>
+            <p class="selectable">Hello, details 3!</p>
+        </div>
+    </main>
+
+    <button type="button" id="clickMe">Click me</button>
+    <p>
+        <label for="age">Your age:</label>
+        <input type="number" id="age" value="14" />
+    </p>
+
+    <form action="/" method="post">
+        <p>
+            <label for="name">Your name:</label>
+            <input type="text" id="name" name="nume" />
+        </p>
+        <p>
+            <label for="age1">Your age:</label>
+            <input type="number" id="age1" value="14" name="varsta" />
+        </p>
+        <button type="submit" id="submitButton">Send data</button>
+    </form>
+
+    <a href="https://google.ro" class="externalLink">Go to Google</a>
+
+
+    <script>
+        var a = 5;
+        console.log(a, typeof a);
+        var b = 2.1;
+        console.log(b, typeof b);
+        b = false;
+        console.log(b, typeof b);
+        b = 'Hello';
+        console.log(b, typeof b);
+        b = "Hello";
+        console.log(b, typeof b);
+
+        console.log(typeof console);
+        var student1 = {
+            name: 'Vasile',
+            grade: 4.2
+        };
+        console.log(student1, typeof student1);
+        console.log(student1.name, typeof student1.name);
+        console.log(student1.grade, typeof student1.grade);
+
+        b = 10;
+        console.log(typeof typeof b); // string
+        console.log(typeof typeof console); // string
+        console.log(typeof typeof typeof b); // string
+
+        // console.log(z);
+        console.log(typeof z); // undefined
+        if (typeof z != 'undefined') {
+            console.log(z);
+        } else {
+            console.error('z is undefined');
+        }
+        console.log(typeof typeof z); // string
+
+        c = '10';
+        if (c == 10) {
+            console.log('c e 10 (==)');
+        } else {
+            console.error('c nu e 10 (==)');
+        }
+
+        if (c === 10) {
+            console.log('c e 10 (===)');
+        } else {
+            console.error('c nu e 10 (===)');
+        }
+
+        console.log(typeof z); // undefined
+        if (typeof z === 'string') {
+            console.log('typeof z is string');
+        } else {
+            console.error('typeof z is not string'); // here
+        }
+
+        if (typeof z === 'undefined') {
+            console.log('typeof z is undefined'); // here
+        } else {
+            console.error('typeof z is not undefined');
+        }
+
+        if (typeof z === undefined) {
+            console.log('typeof z is undefined');
+        } else {
+            console.error('typeof z is not undefined'); // here
+        }
+
+        console.log(typeof undefined); // undefined
+
+        var arr = ['hello', 5, false, {
+            idx: 19,
+            height: 170,
+            passed: true
+        }];
+        console.log(arr);
+
+        var x = 1;
+        if (true) {
+            var x = 2;
+            console.log("x = " + x);
+        }
+        console.log('x after = ' + x);
+
+        let y = 1;
+        if (true) {
+            let y = 2;
+            console.log("y = " + y);
+        }
+        console.log('y after = ' + y);
+
+        t = 13;
+        console.log(t);
+
+        let myObj = {
+            lat: 44.2,
+            long: 20.32,
+            country: 'Romania',
+            noPeople: 20 * 1000 * 1000, // 20000000
+            people: [{
+                name: 'Vasile',
+                age: 40
+            }, {
+                name: 'Gigel',
+                age: 35
+            }]
+        };
+        console.log('lat' in myObj);
+        console.log('country' in myObj);
+        console.log('length' in myObj.people);
+        delete myObj.country;
+        console.log('country' in myObj);
+
+        function hello1() {
+            console.warn('Hello from function hello1');
+        }
+        hello1();
+        console.log(typeof (hello1));
+
+        hello2 = function () {
+            console.log('Hello from function hello2');
+        }
+        hello2();
+        console.log(typeof (hello2));
+
+        hello3 = () => {
+            console.log('Hello from function hello3');
+        }
+        hello3();
+
+
+        function hello1param(name) {
+            console.warn('Hello from function hello1param: ' + name);
+        }
+        hello1param('Vasilica');
+        console.log(typeof (hello1param));
+
+        hello2param = function (name) {
+            console.log('Hello from function hello2param: ' + name);
+        }
+        hello2param('George');
+        console.log(typeof (hello2param));
+
+        hello3param = (name) => {
+            console.log('Hello from function hello3param: ' + name);
+        }
+        hello3param('Maria');
+
+        console.log(document, typeof document);
+        let helloElement = document.getElementById('hello-message');
+        console.log(helloElement, helloElement.innerText);
+        console.log(helloElement.attributes);
+        console.log(helloElement.attributes['id']);
+        console.log(helloElement.attributes[0]);
+
+        let mainElement = document.getElementById('main');
+        let selectableParags = mainElement.getElementsByClassName('selectable');
+        console.log(selectableParags, typeof selectableParags);
+        const deleteIndex = Math.floor(Math.random() * selectableParags.length); // [0; 1) => [0; selectableParags.length)
+        console.warn("Trying to delete " + deleteIndex);
+        for (let i = 0; i < selectableParags.length; i++) {
+            console.log(selectableParags[i].innerHTML);
+        }
+        for (let i = 0; i < selectableParags.length; i++) {
+            console.log(selectableParags[i].innerText);
+        }
+        const detailsElement = document.querySelector('#main > #details');
+        console.log('====', selectableParags.item(deleteIndex), typeof selectableParags.item(deleteIndex));
+        detailsElement.removeChild(selectableParags.item(deleteIndex));
+
+
+        const clickMeButton = document.getElementById('clickMe');
+        clickMeButton.addEventListener('click', function () {
+            alert('You clicked the button');
+        });
+        const ageElement = document.getElementById('age');
+        ageElement.addEventListener('change', function (e) {
+            alert('You cannot change your age');
+            e.preventDefault();
+        });
+
+        const submitButton = document.getElementById('submitButton');
+        submitButton.addEventListener('click', function (e) {
+            e.preventDefault();
+        });
+
+        const externalLinks = document.getElementsByClassName('externalLink');
+        for (externalLink of externalLinks) {
+            externalLink.addEventListener('click', function (e) {
+                e.preventDefault();
+            });
+        }
+
+    </script>
+
+</body>
+
+</html>
