@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ES 6</title>
+</head>
+
+<body>
+    <script>
+        let dog = { name: 'Bailey' };
+        const action = 'bark';
+        let message = `Hi! My name is ${dog.name} and I ${action}`;
+        console.log(message);
+
+        function makeAnimalSound(animal, sound = 'bark') {
+            return `Hi! I am a ${animal} and I make a ${sound} sound`;
+        }
+        console.log(makeAnimalSound('frog', 'oac'));
+        console.log(makeAnimalSound('cat'));
+
+
+        function makeAnimalSounds(animal, ...sounds) {
+            let soundsStr = '';
+            if (sounds.length === 0) {
+                return `Hi! I am a ${animal} and I don't make any sounds`
+            }
+            for (let i = 0; i < sounds.length; i++) {
+                soundsStr += sounds[i] + ', ';
+            }
+            return `Hi! I am a ${animal} and I make the following sounds: ${soundsStr}`;
+        }
+        console.log(makeAnimalSounds('dog', 'bark', 'ham', 'mmmm', 'brrr'));
+        console.log(makeAnimalSounds('cat', 'miau', 'zzzz'));
+        console.log(makeAnimalSounds('penguin'));
+
+        function animalMilestones(animal, babyAge, teenagerAge, adultAge, oldAge) {
+            return `Hi! I am a ${animal} and I have the following age milestones: ${babyAge}, ${teenagerAge}, ${adultAge}, ${oldAge}`;
+        }
+        console.log(animalMilestones('dog', ...[1, 3, 5, 12]));
+        const beforeTeenagerAges = [1, 3];
+        const startWithTeenagerAges = [5, 12];
+        console.log(animalMilestones('dog', ...[...beforeTeenagerAges, ...startWithTeenagerAges]));
+
+        let [babyAge, teenagerAge] = beforeTeenagerAges;
+        console.log(`Before teenager ages: ${babyAge}, ${teenagerAge}`);
+        [babyAge, teenagerAge] = [teenagerAge, babyAge];
+        console.log(`Before teenager ages: ${babyAge}, ${teenagerAge}`);
+
+        const animalAges = {
+            'babyAge': 2,
+            teenagerAge: 5
+        };
+        ({babyAge, teenagerAge} = animalAges);
+        console.log(`Before teenager ages: ${babyAge}, ${teenagerAge}`);
+        const animalAges1 = {
+            'babyAge1': 2,
+            teenagerAge1: 5
+        };
+        let {babyAge1, teenagerAge1} = animalAges;
+        console.log(`Before teenager ages: ${babyAge1}, ${teenagerAge1}`);
+    </script>
+</body>
+
+</html>
