@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cookies, Local & Session Storage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <h1>Cookies</h1>
+                <form>
+                    <p>
+                        <label for="cookie-name">Cookie name:</label>
+                        <input id="cookie-name" type="text" />
+                    </p>
+                    <p>
+                        <label for="cookie-value">Cookie value:</label>
+                        <input id="cookie-value" type="text" />
+                    </p>
+                    <p>
+                        <label for="cookie-exp">Cookie expiration:</label>
+                        <input id="cookie-exp" type="date" />
+                    </p>
+                    <p>
+                        <label for="cookie-check">Agree to Terms and Conditions</label>
+                        <input id="cookie-check" type="checkbox" />
+                    </p>
+                    <p>
+                        <button type="button" onclick="addCookie();">Add Cookie</button>
+                        <button type="button" onclick="deleteCookie();">Delete Cookie</button>
+                    </p>
+                </form>
+            </div>
+            <div class="col-6">
+                <h1>Local Storage</h1>
+                <form>
+                    <p>
+                        <label for="storage-name">Field name:</label>
+                        <input id="storage-name" type="text" />
+                    </p>
+                    <p>
+                        <label for="storage-value">Field value:</label>
+                        <input id="storage-value" type="text" />
+                    </p>
+                    <p>
+                        <button type="button" onclick="addLocalStorage();">Add Local Storage</button>
+                        <button type="button" onclick="deleteLocalStorage();">Delete Local Storageookie</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function printError(error) {
+            if (typeof console !== 'undefined') {
+                console.error(error);
+            } else {
+                alert(error);
+            }
+        }
+        function showCookies() {
+            console.log(document.cookie);
+        }
+        function addCookie() {
+            const cookieName = document.getElementById('cookie-name').value;
+            const cookieValue = document.getElementById('cookie-value').value;
+            const cookieExp = document.getElementById('cookie-exp').value;
+            // Fri, 31 Dec 9999 23:59:59 GMT;
+            // ^
+            // ||showCookies()
+            // 2022-09-08
+            const cookieExpDate = new Date(cookieExp);
+            document.cookie = cookieName + '=' + cookieValue + '; ' + 'expires=' + cookieExpDate;
+            showCookies();
+        }
+        function deleteCookie() {
+            const cookieName = document.getElementById('cookie-name').value;
+            const cookieExpDate = new Date('1990-01-01');
+            document.cookie = cookieName + '=deleted; ' + 'expires=' + cookieExpDate;
+            showCookies();
+        }
+        showCookies();
+
+        function showLocalStorage() {
+            console.log(localStorage);
+        }
+        function addLocalStorage() {
+            if (typeof localStorage !== 'undefined') {
+                const storageName = document.getElementById('storage-name').value;
+                const storageValue = document.getElementById('storage-value').value;
+                localStorage.setItem(storageName, storageValue);
+            } else {
+                printError('Local storage is not defined');
+            }
+            showLocalStorage();
+        }
+        function deleteLocalStorage() {
+            if (typeof localStorage !== 'undefined') {
+                const storageName = document.getElementById('storage-name').value;
+                localStorage.removeItem(storageName)
+            } else {
+                printError('Local storage is not defined');
+            }
+            showLocalStorage();
+        }
+        showLocalStorage();
+        
+        window.addEventListener('storage', (event) => {
+            console.log('test', event);
+            if (event.storageArea != localStorage) {
+                return;
+            } else {
+                document.getElementById('storage-name').value = event.key;
+                document.getElementById('storage-value').value = event.newValue;
+                showLocalStorage();
+            }
+        });
+    </script>
+</body>
+
+</html>
