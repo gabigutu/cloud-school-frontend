@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <nav id="menu">
+        <h1>Menu</h1>
+        <ul>
+            <li><a href="#">Homepage</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <script>
+        const bodyElement = document.getElementsByTagName('body')[0];
+        bodyElement.addEventListener('click', function (e) {
+            console.log('clicked body');
+        });
+
+        const ulElement = document.querySelector('nav#menu > ul');
+        ulElement.addEventListener('click', function (e) {
+            console.log('clicked nav#menu > ul');
+        });
+
+        const liElements = document.getElementsByTagName('li');
+        for (liElement of liElements) {
+            liElement.addEventListener('click', function (e) {
+                e.stopPropagation();
+                console.log('clicked li');
+            })
+        }
+
+        const links = document.getElementsByTagName('a');
+        for (link of links) {
+            link.addEventListener('click', function (e) {
+                console.log('clicked link');
+            })
+        }
+
+        function requestPost(id) {
+            // full asincron (continua executia codului inainte ca promise-ul sa fie rezolvat)
+            const url = 'https://jsonplaceholder.typicode.com/posts/' + id;
+            const promise1 = fetch(url);
+            promise1.then(response => {
+                // promise1 a fost "rezolvat", suntem in zona lui de cod (pe thread-ul lui)
+                // setTimeout(
+                //     function() {
+                //         console.log('Mesaj de pe then-ul promise-ului', 'I received: ', response);
+                //     }, 2000
+                // );
+                console.log('Mesaj de pe then-ul promise-ului', 'I received: ', response);
+                const promiseResponseJson = response.json();
+                promiseResponseJson.then(responseObject => {
+                    // promiseResponseJson a fost "rezolvat", suntem pe zona lui de cod
+                    console.log('Am transformat raspunsul in obiect', responseObject);
+                    const h1Element = document.querySelector('nav#menu > h1');
+                    h1Element.innerText = responseObject.title;
+                });
+                console.log('Obiect response json: ', promiseResponseJson);
+            });
+            console.log('Mesaj din functia requestPost', promise1, typeof promise1);
+        }
+        // requestPost(2);
+
+        async function requestPostWithAwait(id) {
+            // fortat sa astepte cu await doar primirea raspunsului, nu si transformarea lui in obiect
+            const url = 'https://jsonplaceholder.typicode.com/posts/' + id;
+            const serverResponse = await fetch(url);
+            console.log('Mesaj din functia requestPostWithAwait', serverResponse, typeof serverResponse);
+            const promiseResponseJson = serverResponse.json();
+            promiseResponseJson.then(responseObject => {
+                // promiseResponseJson a fost "rezolvat", suntem pe zona lui de cod
+                console.log('Am transformat raspunsul in obiect', responseObject);
+                const h1Element = document.querySelector('nav#menu > h1');
+                h1Element.innerText = responseObject.title;
+            });
+            console.log('Obiect response json: ', promiseResponseJson);
+        }
+        // requestPostWithAwait(2);
+
+        async function requestPostWithTwoAwaits(id) {
+            // full sincron (fortat sa astepte cu await ambele promise-uri)
+            const url = 'https://jsonplaceholder.typicode.com/posts/' + id;
+            const serverResponse = await fetch(url);
+            console.log('Mesaj din functia requestPostWithAwait', serverResponse, typeof serverResponse);
+            const responseObject = await serverResponse.json();
+            console.log('Am transformat raspunsul in obiect', responseObject);
+            const h1Element = document.querySelector('nav#menu > h1');
+            h1Element.innerText = responseObject.title;
+        }
+        // requestPostWithTwoAwaits(2);
+
+        const cakeFunc = function (resolve, reject) {
+            amountInWallet = Math.round(Math.random() * 40);
+            console.log('I have ', amountInWallet, ' RON');
+            if (amountInWallet >= cakeCost) {
+                // const cakeResponse = {
+                //     'json': new Promise((resolve, reject) => {
+                //         // ..
+                //     });
+                // };
+                // resolve(cakeResponse);
+                resolve('I will buy you the cake');
+            } else {
+                reject('I cannot buy you the cake');
+            }
+        };
+
+        let amountInWallet = 100;
+        const cakeCost = 20;
+        // const cakePromise = new Promise(cakeFunc);
+        // cakePromise.then(response => {
+        //     console.log('Cake promise has been resolved: ' + response);
+        // }).catch(errorMsg => {
+        //     console.error('Cake promise has not been resolved: ' + errorMsg);
+        // })
+        // console.log(cakePromise, typeof cakePromise);
+
+        // async function cake2Call() {
+        //     const cakePromise2Response = await new Promise(cakeFunc);
+        //     console.log('Cake promise has been resolved: ' + cakePromise2Response);
+        // }
+        // cake2Call();
+
+        function fetchCake() {
+            const cakePromise = new Promise(cakeFunc);
+            return cakePromise;
+        }
+        const myFetchCake = fetchCake();
+        myFetchCake.then(response => {
+            console.log('Mesaj de pe then-ul myFetchCake-ului', 'I received: ', response);
+        }).catch(errorMsg => {
+            console.error('Cake promise has not been resolved: ' + errorMsg);
+        })
+        console.log('Mesaj din "main"', myFetchCake, typeof myFetchCake);
+
+        // TODO: cakeFunc sa aiba si json() care intoarce un promise
+    </script>
+</body>
+
+</html>
