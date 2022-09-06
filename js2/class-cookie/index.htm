@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Class with cookie</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="cars-area">
+        <ul id="cars">
+        </ul>
+    </div>
+    <script>
+        let cars = [];
+        class Car {
+            constructor(name, noSeats) {
+                this._name = name;
+                this._noSeats = noSeats;
+            }
+
+            get name() {
+                return this._name;
+            }
+
+            set name(name) {
+                this._name = name;
+                document.cookie = 'yourcar=' + this._name;
+            }
+        }
+
+        function createCar(name, noSeats) {
+            return new Car(name, noSeats);
+        }
+
+        function generateCars(noOfCars) {
+            for (let i = 0; i < noOfCars; i++) {
+                const carName = 'Car ' + i;
+                const noSeats = Math.round(Math.random() * 3 + 2); // [2; 5) 
+                const car = createCar(carName, noSeats);
+                cars.push(car);
+            }
+        }
+
+        function appendToList(htmlUlElement, car) {
+            const liElement = document.createElement('li');
+            liElement.innerText = car.name;
+            liElement.addEventListener('click', function() {
+                console.log('you clicked car ' + car.name);
+                const resp = prompt('Enter new car name', car.name);
+                if (resp !== null) {
+                    car.name = resp;
+                    // document.getElementById('')
+                    liElement.innerText = resp;
+                }
+            });
+            htmlUlElement.appendChild(liElement);
+        }
+
+        function populateList(htmlUlElement) {
+            for(car of cars) {
+                appendToList(htmlUlElement, car);
+            }
+        }
+
+        const noCars = Math.floor(Math.random() * 10 + 2);
+        console.log(`Generating ${noCars} cars`);
+        generateCars(noCars);
+        listId = 'cars';
+        const listElement = document.getElementById(listId);
+        populateList(listElement);
+
+
+    </script>
+</body>
+
+</html>

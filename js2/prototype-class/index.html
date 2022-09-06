@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Prototype and class</title>
+</head>
+
+<body>
+    <script>
+        function Dog(firstName, lastName) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.getFullName = function () {
+                // console.log('function getFullName is called');
+                return this.firstName + ' ' + this.lastName;
+            }
+        }
+
+        function Person(firstName, lastName) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.getFullName = function () {
+                // console.log('function getFullName is called');
+                return this.firstName + ' ' + this.lastName;
+            }
+        }
+
+        var p1 = new Person('Mihai', 'Cristescu');
+        var p2 = new Person('Marian', 'Ionescu');
+        console.log(p1.getFullName(), p2.getFullName());
+        console.log(typeof p1, typeof p1.firstName, typeof p1.getFullName, typeof p1.getFullName());
+
+        console.log(p1.__proto__, p2.__proto__);
+        console.log(Person.prototype);
+        console.log(p1.__proto__ == Person.prototype ? 'p1 is a person' : 'p1 is not a person');
+        console.log(Dog.prototype);
+        console.log(p1.__proto__ == Dog.prototype ? 'p1 is a dog' : 'p1 is not a dog');
+
+        Person.prototype.lastName = 'Popescu';
+        console.log(p1.firstName, p1.lastName, p2.firstName, p2.lastName);
+        console.log(p1.getFullName(), p2.getFullName());
+
+        p1.__proto__.lastName = 'Popescu';
+        console.log(p1.firstName, p1.lastName, p2.firstName, p2.lastName);
+
+        Person.prototype.currency = 'EUR';
+        Person.prototype.getSalary = function () {
+            return 20 * this.salary;
+        }
+        p1.salary = 100;
+        p2.salary = 200;
+        console.log(p1.getSalary() + p1.currency, p2.getSalary() + p2.currency);
+
+        p1.__proto__.promote = function () {
+            return 'Person has been promoted';
+        }
+        console.log(typeof p1.promote, p1.promote(), typeof p2.promote, p2.promote());
+
+        p1.arrive = function () {
+            return 'Person arrived';
+        }
+        console.log(typeof p1.arrive, p1.arrive());
+        if (typeof p2.arrive != 'undefined') {
+            console.log(typeof p2.arrive, p2.arrive());
+        }
+
+        // pe prototip
+        Person.prototype.gods = ['God', 'Allah'];
+        p1.gods.push('Zeus');
+        console.log(p1.gods);
+        console.log(p2.gods);
+
+        // pe fiecare obiect
+        p1.devils = ['Devil', 'Lucifer'];
+        p2.devils = ['Diavolul'];
+        console.log(p1.devils);
+        console.log(p2.devils);
+
+        function Vehicle(type = 'Unknown') {
+            this.type = type;
+        }
+        Vehicle.prototype.getType = function () {
+            return this.type;
+        }
+
+        function Car(noSeats) {
+            this.noSeats = noSeats;
+        }
+        Car.prototype = new Vehicle();
+        Car.prototype.getNoSeats = function () {
+            return this.noSeats;
+        }
+
+        vehicle = new Vehicle();
+        console.log('Vehicle ', vehicle);
+
+        car = new Car(4);
+        console.log('Car ', car, car.getType());
+        car.type = 'Auto';
+        console.log('Car ', car, car.getType());
+
+        Vehicle.prototype.accelerate = function () {
+            if (this.type === 'Unknown') {
+                console.error('Vehicle doesn\'t know how to accelerate');
+                return;
+            }
+            console.log('Vehicle accelerates');
+        }
+
+        car.accelerate();
+        car1 = new Car(2);
+        car1.accelerate();
+
+        class VehicleCls {
+            constructor(type = 'Unknown') {
+                this.type = type;
+            }
+        }
+
+        class AutoCls extends VehicleCls {
+            get noSeats() {
+                console.info('You are reading no of car seats')
+                return this._noSeats;
+            }
+            
+            set noSeats(noSeats) {
+                // send post request to modify data on server
+                console.info('You are modifying no of car seats')
+                this._noSeats = noSeats;
+            }
+        }
+
+        vehicleObj = new VehicleCls();
+        carObj = new AutoCls();
+        carObj.type = 'Auto';
+
+        console.log('VehicleObj: ', vehicleObj);
+        console.log('CarObj: ', carObj);
+
+        carObj.noSeats = 5;
+        console.log('Car seats: ', carObj.noSeats);
+
+
+    </script>
+</body>
+
+</html>
